@@ -1,15 +1,14 @@
 import { FC } from "react";
+import { connect, MapStateToProps } from "react-redux";
+import { Dispatch } from "redux";
+import { Action, CartItemType, State } from "../types";
 import CartItem from "./CartItem";
 
 const CartContainer: FC<{
-  cart: {
-    id: number;
-    title: string;
-    price: number;
-    img: string;
-    amount: number;
-  }[];
-}> = ({ cart = [] }) => {
+  cart: CartItemType[];
+  total: number;
+  dispatch: Dispatch<Action>;
+}> = ({ cart = [], total, dispatch }) => {
   if (cart.length === 0) {
     return (
       <section className="cart">
@@ -38,13 +37,28 @@ const CartContainer: FC<{
         <hr />
         <div className="cart-total">
           <h4>
-            total <span>$0.00</span>
+            total <span>${total}</span>
           </h4>
         </div>
-        <button className="btn clear-btn">clear cart</button>
+        <button
+          onClick={() => {
+            dispatch({ type: "CLEAR_CART" });
+          }}
+          className="btn clear-btn"
+        >
+          clear cart
+        </button>
       </footer>
     </section>
   );
 };
 
-export default CartContainer;
+const mapStateToProps: MapStateToProps<
+  { cart: CartItemType[]; total: number },
+  any,
+  State
+> = (state) => {
+  return { cart: state.cart, total: state.total };
+};
+
+export default connect(mapStateToProps)(CartContainer);

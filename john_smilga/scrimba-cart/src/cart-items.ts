@@ -1,4 +1,6 @@
-export default [
+import { CartItemType } from "./types";
+
+const cartItems: CartItemType[] = [
   {
     id: 1,
     title: "Samsung Galaxy S7",
@@ -21,3 +23,4 @@ export default [
     amount: 1,
   },
 ];
+export default cartItems;
