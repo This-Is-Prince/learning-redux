@@ -1,17 +1,16 @@
 interface State {
   total: number;
-  cart: CartItem[];
+  cart: CartItemType[];
   amount: number;
 }
-type Action = {
-  type:
-    | "DECREASE"
-    | "INCREASE"
-    | "REMOVE"
-    | "CLEAR_CART"
-    | "GET_TOTAL"
-    | "GET_AMOUNT";
-};
+
+type Action =
+  | {
+      type: "CLEAR_CART" | "GET_TOTAL" | "GET_AMOUNT";
+    }
+  | { type: "DECREASE"; payload: { id: number } }
+  | { type: "INCREASE"; payload: { id: number } }
+  | { type: "REMOVE"; payload: { id: number } };
 
 interface NavbarProps {
   amount: number;

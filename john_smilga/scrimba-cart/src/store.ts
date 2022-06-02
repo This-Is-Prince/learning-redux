@@ -7,9 +7,9 @@ import type { State } from "./types";
 
 // initial store
 export const initialStore: State = {
-  amount: 5,
+  amount: 3,
   cart: cartItems,
-  total: 105,
+  total: 0,
 };
 
 const store = createStore(reducer, initialStore);
